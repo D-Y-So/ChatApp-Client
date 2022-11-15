@@ -17,20 +17,5 @@ $(() => {
     sendPlainMessage("MyUser", $('#message-input').val())
   })
 
-
-  var input = $('#message-input');
-  input.on("keydown mousedown", ()=> {
-    console.log("Current position: " + input.prop("selectionStart"));
-    console.log("Current position: " + input.prop("selectionEnd"));
-
-  });
-  input.on('keydown', (event) => {
-    var key = event.keyCode || event.charCode;
-
-    if (key == 8 || key == 46) {
-      console.log("deleting: " + input.val().substring(input.prop("selectionStart"),
-      input.prop("selectionEnd")));
-    }
-  });
 })
 openConnection();
