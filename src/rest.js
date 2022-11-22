@@ -9,5 +9,14 @@ const createUser = (user) => {
       }
     })
   }
+  const sendPublicMessage = (userid, message) => {
+  fetch(serverAddress + "/MainRoom/Send", {
+    method: 'POST',
+    body: message,
+    headers: {
+      'Content-Type': 'text/plain',
+      'from': userid
+    }})
+}
 
-export{createUser}
+export{createUser, sendPublicMessage as sendPlainMessage}

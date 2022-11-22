@@ -14,15 +14,13 @@ const onMessageReceived = (payload) => {
     var message = JSON.parse(payload.body);
     messages.push(message)
     let textArea = $('#main-chat');
-    textArea.val(textArea.val() + "\n" + message.sender + ": " + message.content);
+    textArea.val(textArea.val() + "\n"+message.time + message.sender + ": " + message.content);
     console.log(message)
 }
 
 const onConnected = () => {
     stompClient.subscribe('/topic/mainChat', onMessageReceived);
-    stompClient.send("/app/hello", [],
-        JSON.stringify({ name: "Default user" })
-    )
+    stompClient.subscribe('/user',)
 }
 
 const openConnection = () => {
@@ -31,11 +29,6 @@ const openConnection = () => {
     stompClient.connect({}, onConnected);
 }
 
-const sendPlainMessage = (user, message) => {
-    stompClient.send("/app/plain", [], JSON.stringify({
-        sender: user,
-        content: message
-    }))
-}
 
-export { openConnection, sendPlainMessage }
+
+export { openConnection }
