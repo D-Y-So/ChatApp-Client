@@ -9,6 +9,8 @@ const createUser = (user) => {
       }
     })
   }
+  
+
   const sendPublicMessage = (userid, message) => {
   fetch(serverAddress + "/MainRoom/Send", {
     method: 'POST',
@@ -19,4 +21,4 @@ const createUser = (user) => {
     }})
 }
 
-export{createUser, sendPublicMessage as sendPlainMessage}
+export{createUser, sendPublicMessage}
