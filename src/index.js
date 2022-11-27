@@ -14,7 +14,11 @@ $(() => {
   })
 
   $("#send-btn").on("click", () => {
-    sendPublicMessage(1, $('#message-input').val())
+    console.log("send btn clicked");
+    const message = $("#message-input").val();
+    console.log(message);
+    sendPublicMessage(1, message);
+    console.log("message sent");
   })
 
 })
