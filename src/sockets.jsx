@@ -1,41 +1,41 @@
 import * as SockJS from 'sockjs-client';
 import { Stomp } from '@stomp/stompjs';
 import $ from 'jquery'
+import { serverAddress } from "./constants";
 
-
-import { serverAddress } from "./constants"
 let stompClient;
 let messages = [];
+
 const socketFactory = () => {
+    console.log("socketFactory")
     return new SockJS(serverAddress + '/ws');
 }
 
 const onMessageReceived = (payload) => {
+    console.log("message received");
+    console.log(payload);
     var message = JSON.parse(payload.body);
-    messages.push(message)
+    messages.push(message);
     let textArea = $('#main-chat');
-    textArea.val(textArea.val() + "\n" + message.sender + ": " + message.content);
+    textArea.val(textArea.val() + "\n"+message.time + message.sender + ": " + message.content);
     console.log(message)
 }
 
 const onConnected = () => {
+    console.log("connection established");
     stompClient.subscribe('/topic/mainChat', onMessageReceived);
-    stompClient.send("/app/hello", [],
-        JSON.stringify({ name: "Default user" })
-    )
+    stompClient.subscribe('/user',)
 }
 
 const openConnection = () => {
+    console.log("openConnection");
     const socket = socketFactory();
+    console.log(socket);
     stompClient = Stomp.over(socket);
-    stompClient.connect({}, onConnected);
+    console.log(stompClient.connect({}, onConnected));
+    console.log(stompClient);
 }
 
-const sendPlainMessage = (user, message) => {
-    stompClient.send("/app/plain", [], JSON.stringify({
-        sender: user,
-        content: message
-    }))
-}
 
-export { openConnection, sendPlainMessage }
+
+export { openConnection}

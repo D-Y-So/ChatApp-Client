@@ -1,21 +1,11 @@
-import $ from 'jquery'
-import { createUser } from './rest';
-import { openConnection, sendPlainMessage } from './sockets';
-import 'bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
-$(() => {
-  $(document).on('submit', () => {
-    const user = {
-      email: $('#emailInput').val(),
-      name: $('#userInput').val(),
-      password: $('#passwordInput').val()
-    }
-    createUser(user);
-  })
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import 'bootstrap/dist/css/bootstrap.min.css'
 
-  $("#send-btn").on("click", () => {
-    sendPlainMessage("MyUser", $('#message-input').val())
-  })
-
-})
-openConnection();
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
