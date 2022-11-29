@@ -1,11 +1,11 @@
 import * as SockJS from 'sockjs-client';
 import { Stomp } from '@stomp/stompjs';
 import $ from 'jquery'
+import { serverAddress } from "./constants";
 
-
-import { serverAddress } from "./constants"
 let stompClient;
 let messages = [];
+
 const socketFactory = () => {
     console.log("socketFactory")
     return new SockJS(serverAddress + '/ws');
