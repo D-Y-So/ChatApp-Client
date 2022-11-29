@@ -14,7 +14,7 @@ export const MainPage = () => {
     const [userData, setUserData] = useState({
         username: '',
         receivername: '',
-        connected: true,
+        connected: false,
         message: ''
       });
     
