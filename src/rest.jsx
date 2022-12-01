@@ -1,5 +1,5 @@
 import { serverAddress } from "./constants"
-
+import { globalPublicMessages } from "./data"
 const createUser = (user) => {
     fetch(serverAddress + "/user", {
       method: 'POST',
@@ -9,16 +9,21 @@ const createUser = (user) => {
       }
     })
   }
-const getAllPubulicMessages = (userid,startDate,endDate) => {
-    let url=serverAddress + "/MainRoom/GetAll";
-    if(endDate != undefined && startDate != undefined) url+="?startDate="+startDate+"&endDate="+endDate;
-    else if(startDate === undefined) url+="?endDate="+endDate;
-    else if(endDate === undefined) url+="?startDate="+startDate;   
-    fetch(url, {
-        method: 'GET',
+  function getPublicMessages() {   
+    let token = localStorage.getItem("token")
+    return fetch(serverAddress + "/auth/MainRoom/Get", {
+        method: 'Get',
         headers: {
-        'from': userid
-        }})
+            'Content-Type': 'text/plain',
+            'Authorization': token
+        }
+    }).then(response=>response.json())
+    .then(response=>
+    { 
+        console.log(response)
+        return response
+    }
+        );
 }
 const getAllUserPrivateMessages = (userid) => {
     fetch(serverAddress + "/channel/getAll", {
@@ -28,14 +33,20 @@ const getAllUserPrivateMessages = (userid) => {
         }})
 }
 
-const sendPublicMessage = (userid, message) => {
-    fetch(serverAddress + "/MainRoom/Send", {
+const sendPublicMessage = async (userid, message) => {
+    let res = await fetch(serverAddress + "/MainRoom/Send", {
     method: 'POST',
     body: message,
     headers: {
         'Content-Type': 'text/plain',
         'from': userid
     }})
+    if(res.ok)
+    {
+       let respone=res.text()
+       console.log(respone)
+       return Response;
+    }
 }
 
 const getAllRegisteredUsers = async (token) => {
@@ -66,4 +77,4 @@ const getAllUserPrivateChats = async (token) => {
     //     });
     // }
 
-export{createUser, sendPublicMessage,getAllPubulicMessages,getAllUserPrivateMessages, getAllRegisteredUsers, getAllUserPrivateChats}
+export{createUser, getPublicMessages,sendPublicMessage ,getAllUserPrivateMessages, getAllRegisteredUsers, getAllUserPrivateChats}
