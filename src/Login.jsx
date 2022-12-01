@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { serverAddress } from "./constants";
 import { Link, useNavigate } from "react-router-dom";
-import { openConnection } from "./sockets";
+
+
+
 
 export const Login = (props) => {
     const navigate = useNavigate();
@@ -28,9 +30,7 @@ export const Login = (props) => {
             if(res.ok){
                 console.log(resJson);
                 localStorage.setItem("token", resJson);
-                console.log(resJson)
-                openConnection();
-                navigate("/profile");
+                navigate("/mainPage");
                 // need to switch form 
             } else {
                 window.alert("could not log in " + resJson);
