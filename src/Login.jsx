@@ -28,8 +28,9 @@ export const Login = (props) => {
             if(res.ok){
                 console.log(resJson);
                 localStorage.setItem("token", resJson);
+                console.log(resJson)
                 openConnection();
-                navigate("/mainPage");
+                navigate("/profile");
                 // need to switch form 
             } else {
                 window.alert("could not log in " + resJson);

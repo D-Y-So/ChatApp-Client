@@ -1,6 +1,9 @@
+import { Button } from "bootstrap";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+//import { useController, useForm } from "react-hook-form";
 import { serverAddress } from "./constants";
+import { Link } from 'react-router-dom'
 
 // import { useAuth } from "../../contexts/AuthContext";
 // import { generateAvatar } from "../../utils/GenerateAvatar";
@@ -15,31 +18,63 @@ export default function Profile() {
   //const [username, setUsername] = useState("");
   //const [email, setEmail] = useState("");
   const [firstName, setFirstName] = useState("");
+  const [currentImage, setCurrentImage] = useState("");
   const [lastName, setLastName] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState(""); //check if i should upload the image or not
+  const [isPublic, setIsPublic] = useState("");
+  const [userName, setUserName] = useState("");
+  
+  const fetchData = async () => {
+    //e.preventDefault();
+    try {
+      let token = localStorage.getItem("token");
+      let response = await fetch(serverAddress + "/auth/profile/loadSelf", {
+          method:'GET',
+          headers:{
+              'Content-Type': 'application/json',
+              'Authorization' : token
+          }
+      });
+      let responseJson = await response.json();
+  
+      //console.log(responseJson.firstName)
+      //console.log(responseJson.records.value);
+      console.log(responseJson)
+      setFirstName(responseJson.firstName);
+      setLastName(responseJson.lastName);
+      setDateOfBirth(responseJson.dateOfBirth);
+      setDescription(responseJson.description);
+      setCurrentImage(responseJson.imageUrl);
+      setIsPublic(responseJson.public)
 
-  //const { currentUser, updateUserProfile, setError } = useAuth();
+      //console.log(response.lastName);
 
-//   useEffect(() => {
-//     const fetchData = () => {
-//       const res = generateAvatar();
-//       setAvatars(res);
-//     };
 
-//     fetchData();
-//   }, []);
+      if(response.ok){
+        console.log("ok");
+        
+        // need to switch form 
+    } else {
+        window.alert("could not update profile " + responseJson);
+    }
+  
+    } catch (err) {
+      console.log(err)
+    }
+  
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, [])
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
 
-    // if (selectedAvatar === undefined) {
-    //   return setError("Please select an avatar");
-    // }
-    // need to fix this - maybe first load the profile and then update
     try {
-
+      
       let token = localStorage.getItem("token");
       let res = await fetch(serverAddress + "/auth/profile/edit", {
           method:'PUT',
@@ -48,164 +83,145 @@ export default function Profile() {
               lastName: lastName,
               dateOfBirth: dateOfBirth,
               description: description, 
-              imageUrl: imageUrl
+              imageUrl: imageUrl,
+              isPublic: isPublic
           }),
           headers:{
               'Content-Type': 'application/json',
               'Authorization' : token
           }
       });
-      let resJson = await res.text();
+      let resJson = await res.json();
       console.log(resJson);
 
-      //setError("");
-      //setUsername("");
-      //setEmail("");
-      setFirstName("");
-      setLastName("");
-      setDateOfBirth("");
-      setDescription("");
-      setImageUrl("");
-      //setLoading(true);
+      // setFirstName("");
+      // setLastName("");
+      // setDateOfBirth("");
+      // setDescription("");
+      setCurrentImage(resJson.imageUrl);
+
       if(res.ok){
         console.log("ok");
+        window.alert("profile was updated successfully");
         // need to switch form 
     } else {
         window.alert("could not update profile " + resJson);
     }
-    //   const user = currentUser;
-    //   const profile = {
-    //     displayName: username,
-    //     photoURL: avatars[selectedAvatar],
-    //   };
-    //   await updateUserProfile(user, profile);
-    //   navigate("/");
+  
     } catch (e) {
       //setError("Failed to update profile");
     }
 
-    //setLoading(false);
   };
 
   return (
-    // <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-    //   <div className="max-w-md w-full space-y-8">
-    //     <div className="text-center">
-    //       <h2 className="mt-4 text-3xl text-center tracking-tight font-light dark:text-white">
-    //         Pick an avatar
-    //       </h2>
-    //     </div>
-        <form className="space-y-6" onSubmit={handleFormSubmit}>
-          {/* <div className="flex flex-wrap -m-1 md:-m-2">
-            {avatars.map((avatar, index) => (
-              <div key={index} className="flex flex-wrap w-1/3">
-                <div className="w-full p-1 md:p-2">
-                  <img
-                    alt="gallery"
-                    className={classNames(
-                      index === selectedAvatar
-                        ? "border-4  border-blue-700 dark:border-blue-700"
-                        : "cursor-pointer hover:border-4 hover:border-blue-700",
-                      "block object-cover object-center w-36 h-36 rounded-full"
-                    )}
-                    src={avatar}
-                    onClick={() => setSelectedAvatar(index)}
-                  />
-                </div>
+        <form className="profile-form" onSubmit={handleFormSubmit}>
+          <div className="profile-header">
+            <h2>Edit Profile</h2>
+          </div> 
+          <button
+                type="button"
+                className="closebtn"
+                data-dismiss="modal"
+                aria-label="Close"
+                onClick={()=> navigate("/mainPage")}
+              >
+                <span aria-hidden="true">&times;</span>
+          </button>
+          <div className="profile">
+            {/* <legend> profile of + { }</legend> */}
+            {/* <button class="closebtn" onclick={navigate('/mainPage')}>×</button> */}
+ 
+            <div className="circular--portrait">
+              <img src={currentImage} ></img>
+            </div>
+            
+           
+            <div className="profile-inputs">
+              <div>
+                <label htmlFor="firstName"> first name</label>
+                <input
+                id="firstName"
+                name="firstName"
+                type="text"
+                value={firstName}
+                className="form-inputs"
+                placeholder="Enter an first name"
+                onChange={(e) => setFirstName(e.target.value)}
+                />
               </div>
-            ))} */}
-          {/* </div> */}
+            
+            
+              <div>
+              <label htmlFor="lastName"> last name </label>
+              <input
+                id="lastName"
+                name="lastName"
+                type="text"
+                value={lastName}
+                className="form-inputs"
+                placeholder="Enter an last name"
+                onChange={(e) => setLastName(e.target.value)}
+              />
+              </div>
+              <div>
+              <label htmlFor="dateOfBirth"> date of birth  </label>
+              <input
+                id="dateOfBirth"
+                name="dateOfBirth"
+                type="date"
+                value={dateOfBirth}
+                className="form-inputs"
+                placeholder="Enter date of birth"
+                onChange={(e) => setDateOfBirth(e.target.value)}
+              />
+              </div>
+              <div>
+              <label htmlFor="description"> description  </label>
+              <input
+                id="description"
+                name="description"
+                type="text"
+                value={description}
+                className="form-inputs"
+                placeholder="Enter description"
+                // defaultValue={currentUser.displayName && currentUser.displayName} add that the default value will be loaded from the current user profile 
+                onChange={(e) => setDescription(e.target.value)}
+              />
+              </div>
+              <div>
+              <label htmlFor="imageUrl"> image path  </label>
+                <input
+                  id="imageUrl"
+                  name="imageUrl"
+                  type="text"
+                  accept=".jpg, .png"
+                  //value={imageUrl}
+                  href={imageUrl}
+                  className="form-inputs"
+                  placeholder="Enter image path"
+                  onChange={(e) => setImageUrl(e.target.value)}
+                />
+              </div>
+            
+              <div className="private-public">
+              <label htmlFor="isPublic"> profile is public or private </label>
+                {/* <fieldset> */}
+                {/* <legend>profile :</legend> */}
+                <div>
+                  <input id= "isPublic" type="radio" value="true" name="profile is public" onClick={(e) => setIsPublic(1)}/> public
+                  <input id= "isPublic" type="radio" value="false" name="profile is public" onClick={(e) => setIsPublic(0)}/> private
+                </div>
+                </div>
+                <button type="submit" className="update-profile-btn"> Update Profile </button>
+            </div>
+            
 
-          <div className="rounded-md shadow-sm -space-y-px">
-            {/* <input
-              id="username"
-              name="username"
-              type="text"
-              //autoComplete="username"
-              required
-              className="appearance-none rounded-none relative block w-full px-3 py-2 placeholder-gray-500 rounded-t-md bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:z-10 sm:text-sm"
-              placeholder="Enter a Display Name"
-              // defaultValue={currentUser.displayName && currentUser.displayName} add that the default value will be loaded from the current user profile 
-              onChange={(e) => setUsername(e.target.value)}
-            /> */}
-            {/* <input
-              id="email"
-              name="email"
-              type="text"
-              //autoComplete="email"
-              required
-              className="appearance-none rounded-none relative block w-full px-3 py-2 placeholder-gray-500 rounded-t-md bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:z-10 sm:text-sm"
-              placeholder="Enter an email"
-              // defaultValue={currentUser.displayName && currentUser.displayName} add that the default value will be loaded from the current user profile 
-              onChange={(e) => setEmail(e.target.value)}
-            /> */}
-            <input
-              id="firstName"
-              name="firstName"
-              type="text"
-              //autoComplete="firstName"
-              required
-              className="appearance-none rounded-none relative block w-full px-3 py-2 placeholder-gray-500 rounded-t-md bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:z-10 sm:text-sm"
-              placeholder="Enter an first name"
-              // defaultValue={currentUser.displayName && currentUser.displayName} add that the default value will be loaded from the current user profile 
-              onChange={(e) => setFirstName(e.target.value)}
-            />
-            <input
-              id="lastName"
-              name="lastName"
-              type="text"
-              //autoComplete="lastName"
-              required
-              className="appearance-none rounded-none relative block w-full px-3 py-2 placeholder-gray-500 rounded-t-md bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:z-10 sm:text-sm"
-              placeholder="Enter an last name"
-              // defaultValue={currentUser.displayName && currentUser.displayName} add that the default value will be loaded from the current user profile 
-              onChange={(e) => setLastName(e.target.value)}
-            />
-            <input
-              id="dateOfBirth"
-              name="dateOfBirth"
-              type="date"
-              //autoComplete="dateOfBirth"
-              required
-              className="appearance-none rounded-none relative block w-full px-3 py-2 placeholder-gray-500 rounded-t-md bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:z-10 sm:text-sm"
-              placeholder="Enter date of birth"
-              // defaultValue={currentUser.displayName && currentUser.displayName} add that the default value will be loaded from the current user profile 
-              onChange={(e) => setDateOfBirth(e.target.value)}
-            />
-            <input
-              id="description"
-              name="description"
-              type="text"
-              autoComplete="description"
-              required
-              className="appearance-none rounded-none relative block w-full px-3 py-2 placeholder-gray-500 rounded-t-md bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:z-10 sm:text-sm"
-              placeholder="Enter description"
-              // defaultValue={currentUser.displayName && currentUser.displayName} add that the default value will be loaded from the current user profile 
-              onChange={(e) => setDescription(e.target.value)}
-            />
-            <input
-              id="imageUrl"
-              name="imageUrl"
-              type="text"
-              //autoComplete="imageUrl"
-              required
-              className="appearance-none rounded-none relative block w-full px-3 py-2 placeholder-gray-500 rounded-t-md bg-gray-50 border border-gray-300 text-gray-900 text-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 focus:z-10 sm:text-sm"
-              placeholder="Enter image url"
-              // defaultValue={currentUser.displayName && currentUser.displayName} add that the default value will be loaded from the current user profile 
-              onChange={(e) => setDescription(e.target.value)}
-            />
-
-
+             
+         
+            
           </div>
-          <div>
-            <button
-              type="submit"
-              //disabled={loading}
-              className="w-full py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              Update Profile
-            </button>
-          </div>
+          
         </form>
     //   </div>
     // </div>
