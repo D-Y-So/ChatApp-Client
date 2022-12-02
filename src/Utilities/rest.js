@@ -52,7 +52,8 @@ function sendPublicMessage(messageBody) {
     }).then(result => result);
 }
 
-function getAllRegisteredUsers () {
+function getAllRegisteredUsers (lastUpdate) {
+    if(!lastUpdate) lastUpdate = Date();
     let token = getToken();
     return fetch(serverAddress + "/auth/get-all-registered-users", {
         method: 'GET',
