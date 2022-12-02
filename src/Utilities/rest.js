@@ -1,3 +1,4 @@
+import { param } from "jquery";
 import { serverAddress } from "./constants";
 import { getToken } from "./useLocalStorage";
 
@@ -53,9 +54,10 @@ function sendPublicMessage(messageBody) {
 }
 
 function getAllRegisteredUsers (lastUpdate) {
-    if(!lastUpdate) lastUpdate = Date();
+    let url=serverAddress + "/auth/get-registered-users";
+    if(lastUpdate) url+="?lastUpdate="+lastUpdate.toTimeString();
     let token = getToken();
-    return fetch(serverAddress + "/auth/get-all-registered-users", {
+    return fetch(url, {
         method: 'GET',
         headers:{
             'Authorization': token
