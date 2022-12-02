@@ -1,5 +1,7 @@
-import { serverAddress } from "./constants"
-import { globalPublicMessages } from "./data"
+import { serverAddress } from "./constants";
+import { getToken } from "./useLocalStorage";
+
+
 const createUser = (user) => {
     fetch(serverAddress + "/user", {
       method: 'POST',
@@ -10,7 +12,7 @@ const createUser = (user) => {
     })
   }
   function getPublicMessages() {   
-    let token = localStorage.getItem("token")
+    let token = getToken();
     return fetch(serverAddress + "/auth/MainRoom/Get", {
         method: 'Get',
         headers: {
@@ -23,7 +25,7 @@ const createUser = (user) => {
         console.log(response)
         return response
     }
-        );
+    );
 }
 const getAllUserPrivateMessages = (userid) => {
     fetch(serverAddress + "/channel/getAll", {
@@ -33,39 +35,45 @@ const getAllUserPrivateMessages = (userid) => {
         }})
 }
 
-const sendPublicMessage = async (userid, message) => {
-    let res = await fetch(serverAddress + "/MainRoom/Send", {
-    method: 'POST',
-    body: message,
-    headers: {
-        'Content-Type': 'text/plain',
-        'from': userid
-    }})
-    if(res.ok)
-    {
-       let respone=res.text()
-       console.log(respone)
-       return Response;
-    }
+function sendPublicMessage(messageBody) {
+    console.log("sendPublicMessage");
+    let token = getToken();
+    return fetch(serverAddress + "/auth/MainRoom/Send", {
+        method: 'POST',
+        body: messageBody,
+        headers: {
+            'Content-Type': 'text/plain',
+            'Authorization': token
+        }
+    }).then(Response => {
+        if (Response.ok) {
+            return Response.text();
+        }
+    }).then(result => result);
 }
 
-const getAllRegisteredUsers = async (token) => {
-    fetch(serverAddress + "/auth/get-all-registered-users", {
+function getAllRegisteredUsers () {
+    let token = getToken();
+    return fetch(serverAddress + "/auth/get-all-registered-users", {
         method: 'GET',
         headers:{
             'Authorization': token
         }
-    });
+    }).then(response=>response.json())
+    .then(responseBody=>responseBody);
 }
+
 
 const getAllUserPrivateChats = async (token) => {
-    fetch(serverAddress + "/auth/channel/get-all-private-messages", {
+    return fetch(serverAddress + "/auth/channel/get-all-private-messages", {
         method: 'GET',
         headers:{
             'Authorization': token
         }
-    });
+    }).then(response=>response.json())
+    .then(response=>{console.log(response)});
 }
+
 
     // export const loadProfile = async () => {
     //     let token = localStorage.getItem("token");

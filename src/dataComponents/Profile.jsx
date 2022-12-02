@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { serverAddress } from "./constants";
+import { serverAddress } from "./../Utilities/constants";
 
 // import { useAuth } from "../../contexts/AuthContext";
 // import { generateAvatar } from "../../utils/GenerateAvatar";
