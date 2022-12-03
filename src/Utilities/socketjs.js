@@ -1,7 +1,7 @@
 import * as SockJS from 'sockjs-client';
 import { Stomp } from '@stomp/stompjs';
 import { serverAddress } from "./constants";
-import {addMessage} from "./data";
+import { addMessage } from "../dataComponents/publicMessages";
 import { getPublicMessages } from './rest';
 
 let stompClient;
@@ -31,7 +31,7 @@ function useMessageReceived(payload) {
     console.log("message received");
     console.log(payload);
     var message = JSON.parse(payload.body);
-    console.log(message);  
+    console.log(message);
     addMessage(message);
 }
-export {openConnection};
+export { openConnection };

@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import './App.css';
-import {Login} from "./Login";
-import Register from "./Register";
+import {Login} from "./appFlow/Login";
+import Register from "./appFlow/Register";
+import PrintAllUsers from './appFlow/printAllUsers';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Profile from './Profile';
-import MainPage from './MainPage';
+import Profile from './dataComponents/Profile';
+import MainPage from './appFlow/MainPage';
 
 
 
@@ -24,6 +25,7 @@ function App() {
     <div className='App'>
     <Router>
       <Routes>
+        <Route exact path="/printAllUsers" element={<PrintAllUsers />} />
         <Route exact path="/register" element={<Register />} />
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/profile" element={<Profile/>} />

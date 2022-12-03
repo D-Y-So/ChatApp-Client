@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getPublicMessages } from "./rest";
+import { getPublicMessages } from "../Utilities/rest";
 
 let addMessageToPublicMessages;
 export function usePublicMesagges() {
