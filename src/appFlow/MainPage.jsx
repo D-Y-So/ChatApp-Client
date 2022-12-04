@@ -10,6 +10,8 @@ import { get } from "jquery";
 import {GetUsersNew} from "../dataComponents/newUsers.jsx";
 import { openConnection, isConnected } from "../Utilities/socketjs.js";
 import PrivateChat from "../dataComponents/PrivateChat.jsx";
+import Logout from "./Logout.jsx";
+
 
 export const MainPage = () => {
     const navigate = useNavigate();
@@ -27,6 +29,7 @@ export const MainPage = () => {
     // console.log(registeredUsers instanceof Array);
     const [tab, setTab] = useState("Main Chat");
     let username = null;
+    console.log(tab);
 
     useEffect(() => {
         async function init() {
@@ -39,8 +42,13 @@ export const MainPage = () => {
 
     useEffect(() => {
         console.log("useEffect");
+        console.log(publicMessages);
+    }, [publicMessages]);
 
-    }, [publicMessages])
+    function changeTab(t) {
+        setTab(t);
+        console.log(tab)
+    }
 
 
     function inputMessage(e) {
@@ -51,7 +59,9 @@ export const MainPage = () => {
 
     return (
         <div className="MainPage">
-            <div className="container">
+            
+            {tab === "Main Chat" ? <div className="container">
+                <h2 className="main-chat-title">Main Chat Room</h2>
                 <div className="users">
                     <ul title="All Registered Users :"> {users && users.map(
                         (user, index) => 
@@ -61,7 +71,7 @@ export const MainPage = () => {
                         )}
                     </ul>
                 </div>
-                {tab === "Main Chat" ? <div className="messages-container">
+                <div className="messages-container">
                     <div className="messages">
                         <ul>{publicMessages && publicMessages.map(
                             (message, index) => <li className = "message-li" key={index}>{message.time + "  " + message.sender + ": " + message.content}</li>
@@ -69,11 +79,17 @@ export const MainPage = () => {
                     </div>
                     <input className="text-in" onChange={inputMessage}></input>
                     <button className="send-btn" onClick={() => sendPublicMessage(messageToSend)}>send</button>
-                </div> : <PrivateChat user={tab} /> }
-                <div >
-                    <button className="profile-btn" onClick={() => navigate("/Profile")}> view profile</button>
                 </div>
-            </div>
+                <div >
+                    <button className="profile-btn" onClick={() => navigate("/Profile")}> edit profile</button>
+                </div> 
+                <div>
+                    <Logout/>
+                </div>
+                </div> : 
+                <PrivateChat user={tab}/> }
+
+           
             
         </div>
     )

@@ -4,7 +4,7 @@ import {Login} from "./appFlow/Login";
 import Register from "./appFlow/Register";
 import PrintAllUsers from './appFlow/printAllUsers';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Profile from './dataComponents/Profile';
+import Profile from './dataComponents/SelfProfile';
 import MainPage from './appFlow/MainPage';
 import PrivateChat from './dataComponents/PrivateChat'
 
