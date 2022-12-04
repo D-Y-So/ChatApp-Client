@@ -80,23 +80,25 @@ export const MainPage = () => {
         <div className="MainPage">
             <div className="container">
                 <div className="users">
-                    <ul title="All Registered Users:"> {users && users.map(
+                    <ul title="All Registered Users :"> {users && users.map(
                         (user, index) => 
                         <li key={index}>
-                            {<button onClick={() =>console.log("click on " + user.username) }>{user.username}</button>}
+                            {<button className="user-li" onClick={() =>console.log("click on " + user.username) }>{user.username}</button>}
                         </li>
                         )}
                     </ul>
                 </div>
-                <div className="messages">
-                    <ul>{publicMessages && publicMessages.map(
-                        (message, index) => <li key={index}>{JSON.stringify(message)}</li>
-                    )}</ul>
-                    <input onChange={inputMessage}></input>
-                    <button onClick={() => sendPublicMessage(messageToSend)}>send</button>
+                <div className="messages-container">
+                    <div className="messages">
+                        <ul>{publicMessages && publicMessages.map(
+                            (message, index) => <li className = "message-li" key={index}>{message.time + "  " + message.sender + ": " + message.content}</li>
+                        )}</ul>
+                    </div>
+                    <input className="text-in" onChange={inputMessage}></input>
+                    <button className="send-btn" onClick={() => sendPublicMessage(messageToSend)}>send</button>
                 </div> 
-                <div className="profile-btn">
-                    <button onClick={() => navigate("/Profile")}> view profile</button>
+                <div >
+                    <button className="profile-btn" onClick={() => navigate("/Profile")}> view profile</button>
                 </div>
             </div>
             

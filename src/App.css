@@ -96,6 +96,7 @@
     padding: 10px;
     font-size: 1.2em;
   }
+
   .button{
     border: none;
     padding: 10px;
@@ -158,12 +159,7 @@
     padding: 0;
     list-style-type: none;
   }
-  .send-button{
-    width:10%;
-    border-radius: 50px;
-    margin-left: 5px;
-    cursor: pointer;
-  }
+
   fieldset {
     display: block;
     color:white;
@@ -266,61 +262,140 @@
     /* padding: 10px; */
   }
 
-  .closebtn {
-    color: rgb(127, 3, 3);
-    background-color: rgb(251, 58, 58);
-    position: absolute;
-    top: 20px;
-    right: 13px;
-    font-size:12px;
-    border-radius: 50%;
-    border: 1px solid rgb(127, 3, 3);
-    font-weight: 700;
-  }
+.closebtn {
+  color: rgb(127, 3, 3);
+  background-color: rgb(251, 58, 58);
+  position: absolute;
+  top: 20px;
+  right: 13px;
+  font-size:12px;
+  border-radius: 50%;
+  border: 1px solid rgb(127, 3, 3);
+  font-weight: 700;
+}
 
   
 
-  .profile-inputs{
-    flex-direction: column;
-    position: absolute; 
-    top: 270px;
-    left: 610px;
-    color: white;
-    font-size: large;
-    /* text-align: center; */
-    /* margin: 15px; */
-  }
-  .update-profile-btn{
-    margin: 1.5rem 0;
-    border: none;
-    background-color:rgb(201, 169, 248);
-    padding: 10px;
-    border-radius: 10px;
-    font-size: large;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    cursor:pointer;
-    color: white;
-    /* font-weight: 500; */
-  }
+.profile-inputs{
+  flex-direction: column;
+  position: absolute; 
+  top: 270px;
+  left: 610px;
+  color: white;
+  font-size: large;
+  /* text-align: center; */
+  /* margin: 15px; */
+}
+.update-profile-btn{
+  margin: 1.5rem 0;
+  border: none;
+  background-color:rgb(201, 169, 248);
+  padding: 10px;
+  border-radius: 10px;
+  font-size: large;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  cursor:pointer;
+  color: white;
+  /* font-weight: 500; */
+}
 
-  ul[title]::before {
-    content: attr(title);
-    /* then add some nice styling as needed, eg: */
-    display: block;
-    font-weight: bold;
-    color: white;
-    padding: 4px;
+ul[title]::before {
+  content: attr(title);
+  display: block;
+  font-size: large;
+  /* font-weight: bold; */
+  color: white;
+  padding: 4px;
+}
+
+ul{
+  overflow-y: auto;
+  height: 450px;
 }
 
 .container{
   display: flex;
+  /* background-color: white; */
+  padding: 50px;
+  border-radius: 10px;
 }
 
 li { 
-  margin-bottom: 3px;
-  display: flex;  
-  width: 100%;
+  margin: 3px;
+  /* vertical-align: middle; */
+  display: flex;
 }
+
+.messages{
+  color:white;
+  /* background-color: rgb(209, 209, 209); */
+  padding: 5px;
+  border-radius: 5px;
+  /* margin:10px;
+  width: 280px;
+  height: 500px; */
+  /* position:absolute;
+  overflow-y:scroll; */
+}
+
+.messages-container{
+  /* background-color:white ; */
+  width: 600px;
+  height: 700px;
+}
+
+.message-li{
+  background-color: rgb(190, 190, 190);
+  border-radius: 10px;
+  padding: 5px; 
+  margin:5px;
+  vertical-align: middle;
+}
+
+.send-btn{
+  padding: 5px;
+  margin: 5px;
+  border-radius: 5px;
+  background-color:rgb(100, 198, 85);
+  color: #fff;
+  border: none;
+  
+}
+
+.text-in{
+  border-radius: 5px;
+  position:center;
+  border: none;
+}
+
+.profile-btn{
+  padding:5px;
+  display: block;
+  border-radius: 10px;
+  border:none;
+  color:white;
+  background-color: rgb(132, 132, 132);
+  margin-left: 100px;
+
+}
+
+.profile-btn:hover{
+  background-color: #555;
+}
+
+.user-li{
+  background-color: rgb(201, 169, 248);
+  border:none;
+  border-radius: 5px;
+  color:white;
+  cursor: pointer;
+}
+
+.user-li:hover{
+  background-color:rgb(180, 131, 254) ;
+}
+
+
 
 /* .profile-btn{
   background-image:"ChatApp-Client/public/profile-img.jpeg" ;
