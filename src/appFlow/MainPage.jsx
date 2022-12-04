@@ -31,9 +31,6 @@ export const MainPage = () => {
     useEffect(() => {
         async function init() {
         username = await getUsernameFromToken();
-        console.log("init");
-        console.log(username);
-        console.log("after" + username);
         openConnection(username);
         } 
         init();

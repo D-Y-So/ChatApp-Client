@@ -3,6 +3,7 @@ import { Stomp } from '@stomp/stompjs';
 import { serverAddress } from "./constants";
 import { addMessage } from "../dataComponents/publicMessages";
 import { getPublicMessages } from './rest';
+import {addPrivateMessage} from '../dataComponents/PrivateChat'
 
 let stompClient;
 function socketFactory() {
@@ -13,7 +14,8 @@ function socketFactory() {
 
 
 function onConnected(username) {
-    let x = '/user/' + username;
+    let x = '/user/' + username +"/";
+    console.log(x)
     console.log("connection established");
     stompClient.subscribe('/topic/mainChat', usePublicMessageReceived);
     stompClient.subscribe(x,usePrivateMessageReceived)
@@ -40,6 +42,8 @@ function usePrivateMessageReceived(payload) {
     console.log("private message recieved");
     var message = JSON.parse(payload.body);
     console.log(message);
+    addPrivateMessage(message);
+    
 
     
 }

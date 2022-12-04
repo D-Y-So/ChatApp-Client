@@ -4,7 +4,7 @@ import { serverAddress } from "./../Utilities/constants";
 import { getAllUserPrivateMessages} from "../Utilities/rest";
 import { sendPrivateMessage } from "../Utilities/rest";
 
-
+let addMessageToPrivateMessages;
 export default function PrivateChat ({user}) {
     const [messages, setMessages] = useState([]);
     const [messageToSend, setMessageToSend] = useState("");
@@ -14,13 +14,23 @@ export default function PrivateChat ({user}) {
         async function init() {
             let res = await getAllUserPrivateMessages(user);
             setMessages([res]);
+            console.log([res]);
+            addMessageToPrivateMessages=addPrivateMessage;
         }
         init();
         
     },[]);
 
+    useEffect(() => {
+        console.log("here");
+    },messages);
+
     function inputMessage(e) {
         setMessageToSend(e.target.value);
+    }
+
+    function addPrivateMessage(message){
+        setMessages((messages) =>[...messages, message])
     }
 
 
@@ -35,4 +45,12 @@ export default function PrivateChat ({user}) {
     )
 
 }
+
+export function addPrivateMessage(message) {
+    if(addMessageToPrivateMessages) {
+        addMessageToPrivateMessages(message);
+    }
+}
+
+
 
