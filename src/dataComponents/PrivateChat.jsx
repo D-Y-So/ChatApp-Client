@@ -13,17 +13,16 @@ export default function PrivateChat ({user}) {
     useEffect(() => {
         async function init() {
             let res = await getAllUserPrivateMessages(user);
-            setMessages([res]);
-            console.log([res]);
-            addMessageToPrivateMessages=addPrivateMessage;
+            setMessages(res);          
         }
         init();
-        
+        addMessageToPrivateMessages=addPrivateMessage;     
+        return () => addMessageToPrivateMessages = null    
     },[]);
 
     useEffect(() => {
         console.log("here");
-    },messages);
+    },[messages]);
 
     function inputMessage(e) {
         setMessageToSend(e.target.value);
@@ -41,6 +40,7 @@ export default function PrivateChat ({user}) {
                         )}</ul>
                         <input onChange={inputMessage}></input>
                         <button onClick={() => sendPrivateMessage(messageToSend, user)}>send</button>
+                        <button onClick={() => navigate("/MainPage")}>back</button>
                     </div> 
     )
 

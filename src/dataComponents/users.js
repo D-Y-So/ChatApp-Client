@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getAllRegisteredUsers } from "../Utilities/rest";
+let addUserFunc;
 export function GetUsers()
 {
     const [users, setUsers] = useState([]);
@@ -15,6 +16,9 @@ export function GetUsers()
             lastUpdate=new Date();
         }
         init();
+        addUserFunc=addNewUser;
+        return () => addUserFunc = null;
+        /*
         const interval = setInterval(getUsers,5000);
         return () => clearInterval(interval);
         async function getUsers()
@@ -26,7 +30,7 @@ export function GetUsers()
             setUsers((users) =>users.concat(usersFromApi));                
             }
             lastUpdate=new Date();
-        }
+        }*/
     },[]);
     useEffect(()=>
     {
@@ -37,7 +41,17 @@ export function GetUsers()
         console.log("new users list changed");
       console.log(newUsers);
     },[newUsers]);
+    function addNewUser(user)
+    {
+        setUsers((users) => [...users, user]);
+    }
    
     
     return [users];
+}
+export function addNewUser(user)
+{
+    if(addUserFunc) {
+        addUserFunc(user);
+    }
 }
