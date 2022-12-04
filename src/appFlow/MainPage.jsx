@@ -83,7 +83,7 @@ export const MainPage = () => {
                     <ul title="All Registered Users:"> {users && users.map(
                         (user, index) => 
                         <li key={index}>
-                            {<button onClick={<PrivateChat>{user.username}</PrivateChat> }>{user.username}</button>}
+                            {<button onClick={() =>console.log("click on " + user.username) }>{user.username}</button>}
                         </li>
                         )}
                     </ul>
