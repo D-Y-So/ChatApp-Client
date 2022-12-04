@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { serverAddress } from "./../Utilities/constants";
+import { serverAddress } from "../Utilities/constants";
 
 // import { useAuth } from "../../contexts/AuthContext";
 // import { generateAvatar } from "../../utils/GenerateAvatar";
@@ -9,7 +9,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function Profile() {
+export default function SelfProfile() {
   const navigate = useNavigate();
 
   //const [username, setUsername] = useState("");
