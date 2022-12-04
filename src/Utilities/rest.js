@@ -1,4 +1,5 @@
 import { param } from "jquery";
+import { useTransition } from "react";
 import { serverAddress } from "./constants";
 import { getToken } from "./useLocalStorage";
 
@@ -33,6 +34,7 @@ const getAllUserPrivateMessages = (username) => {
     return fetch(serverAddress + "/auth/channel/get?reciverName="+username, {
         method: 'GET',
         headers: {
+            'Content-Type': 'text/plain',
             'Authorization': token
     }}).then(response => {
         if(response.ok){
@@ -118,6 +120,7 @@ function getUsernameFromToken(){
         }
     }).then(result => result);
 }
+
 function guestLogin(){
     let url=serverAddress+"/guestJoin";
     return fetch(url,{
@@ -126,6 +129,24 @@ function guestLogin(){
     .then(response=>response.text())
     .then(response=>{return response});
 }
+
+
+function getOtherProfileByUsername(username){
+    let token = getToken();
+    return fetch(serverAddress + "/auth/profile/load?usernameToView="+username ,{
+        method: 'GET',
+        headers: {
+            'Authorization': token
+        }
+    }).then(Response => {
+        if (Response.ok) {
+            return Response.json();
+        }
+    }).then(result => result);
+
+}
+
+
 
 
 
