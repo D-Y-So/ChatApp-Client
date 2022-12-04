@@ -6,6 +6,7 @@ import PrintAllUsers from './appFlow/printAllUsers';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Profile from './dataComponents/Profile';
 import MainPage from './appFlow/MainPage';
+import PrivateChat from './dataComponents/PrivateChat'
 
 
 
@@ -30,6 +31,7 @@ function App() {
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/profile" element={<Profile/>} />
         <Route exact path='/mainPage' element={<MainPage/>} />
+        <Route exact path ='/privateChat' element={<PrivateChat/>} />
       </Routes>
     </Router>
     </div>

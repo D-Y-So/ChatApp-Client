@@ -303,6 +303,29 @@
     /* font-weight: 500; */
   }
 
+  ul[title]::before {
+    content: attr(title);
+    /* then add some nice styling as needed, eg: */
+    display: block;
+    font-weight: bold;
+    color: white;
+    padding: 4px;
+}
+
+.container{
+  display: flex;
+}
+
+li { 
+  margin-bottom: 3px;
+  display: flex;  
+  width: 100%;
+}
+
+/* .profile-btn{
+  background-image:"ChatApp-Client/public/profile-img.jpeg" ;
+} */
+
 
 
 
