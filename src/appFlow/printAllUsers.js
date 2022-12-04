@@ -2,20 +2,14 @@ import { GetUsers } from "../dataComponents/users";
 
 export default function PrintAllUsers()
 {
-    const {users, newUsers} = GetUsers();
+    const [users] = GetUsers();
     return (
         <div className="users">
         <div className="usersList">
             <ul>{users.map(
-                (user,index) => <li key={index}><PrintUser>{user}</PrintUser></li>
+                (user,index) => <li key={index}>{PrintUser(user)}</li>
             )}</ul>
-            </div>
-           <div className="newUsersList">
-            {console.log("printing new users")}
-           <ul>{newUsers.map(
-                (user,index) => <li key={index}><PrintUser>{user}</PrintUser></li>
-           )}</ul>
-           </div> 
+            </div>           
            </div>
     )
 }

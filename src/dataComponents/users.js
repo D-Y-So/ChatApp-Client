@@ -39,5 +39,5 @@ export function GetUsers()
     },[newUsers]);
    
     
-    return {users, newUsers};
+    return [users];
 }
