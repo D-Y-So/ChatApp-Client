@@ -77,20 +77,6 @@ function getAllRegisteredUsers (lastUpdate) {
         return response;    });
 }
 
-// function getAllRegisteredUsers (lastUpdate) {
-//     let url=serverAddress + "/auth/get-registered-users";
-//     if(lastUpdate) url+="?lastUpdate="+lastUpdate.toTimeString();
-//     let token = getToken();
-//     return fetch(url, {
-//         method: 'GET',
-//         headers:{
-//             'Authorization': token
-//         }
-//     }).then(response=>response.json())
-//     .then(responseBody=>responseBody);
-// }
-
-
 const getAllUserPrivateChats = async (token) => {
     return fetch(serverAddress + "/auth/channel/get-all-private-messages", {
         method: 'GET',
@@ -118,6 +104,22 @@ function sendPrivateMessage(messageBody, username) {
     }).then(result => result);
 }
 
+function getUsernameFromToken(){
+    let token = getToken();
+    return fetch(serverAddress + "/auth/name" ,{
+        method: 'GET',
+        headers: {
+            'Authorization': token
+        }
+    }).then(Response => {
+        if (Response.ok) {
+            return Response.text();
+        }
+    }).then(result => result);
+}
+
+
+
 
 
     // export const loadProfile = async () => {
@@ -130,4 +132,4 @@ function sendPrivateMessage(messageBody, username) {
     //     });
     // }
 
-export{createUser, getPublicMessages,sendPublicMessage ,getAllUserPrivateMessages, getAllRegisteredUsers, getAllUserPrivateChats, sendPrivateMessage}
+export{getUsernameFromToken, createUser, getPublicMessages,sendPublicMessage ,getAllUserPrivateMessages, getAllRegisteredUsers, getAllUserPrivateChats, sendPrivateMessage}

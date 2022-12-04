@@ -12,26 +12,36 @@ function socketFactory() {
 
 
 
-function onConnected() {
-    getPublicMessages();
+function onConnected(username) {
+    let x = '/user/' + username;
     console.log("connection established");
-    stompClient.subscribe('/topic/mainChat', useMessageReceived);
-    stompClient.subscribe('/user',)
+    stompClient.subscribe('/topic/mainChat', usePublicMessageReceived);
+    stompClient.subscribe(x,usePrivateMessageReceived)
+    console.log("first")
 }
 
-function openConnection() {
+function openConnection(username) {
     console.log("openConnection");
+    console.log(username);
     const socket = socketFactory();
     console.log(socket);
     stompClient = Stomp.over(socket);
-    console.log(stompClient.connect({}, onConnected));
-    console.log(stompClient);
+    stompClient.connect({}, () => onConnected(username));
 }
-function useMessageReceived(payload) {
+function usePublicMessageReceived(payload) {
     console.log("message received");
     console.log(payload);
     var message = JSON.parse(payload.body);
     console.log(message);
     addMessage(message);
 }
+
+function usePrivateMessageReceived(payload) {
+    console.log("private message recieved");
+    var message = JSON.parse(payload.body);
+    console.log(message);
+
+    
+}
+
 export { openConnection };

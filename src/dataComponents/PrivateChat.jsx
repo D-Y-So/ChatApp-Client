@@ -5,16 +5,15 @@ import { getAllUserPrivateMessages} from "../Utilities/rest";
 import { sendPrivateMessage } from "../Utilities/rest";
 
 
-export default function PrivateChat (user) {
+export default function PrivateChat ({user}) {
     const [messages, setMessages] = useState([]);
     const [messageToSend, setMessageToSend] = useState("");
     const navigate = useNavigate();
-    console.log(user);
 
     useEffect(() => {
         async function init() {
             let res = await getAllUserPrivateMessages(user);
-            setMessages(res);
+            setMessages([res]);
         }
         init();
         
@@ -23,6 +22,7 @@ export default function PrivateChat (user) {
     function inputMessage(e) {
         setMessageToSend(e.target.value);
     }
+
 
     return (
         <div className="private-messages">
