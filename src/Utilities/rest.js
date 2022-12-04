@@ -62,8 +62,7 @@ function sendPublicMessage(messageBody) {
 
 function getAllRegisteredUsers (lastUpdate) {
     let url=serverAddress + "/auth/get-registered-users";
-    // console.log(lastUpdate != 0)
-    if(lastUpdate) url+="?lastUpdate="+lastUpdate.toTimeString();
+    if(lastUpdate) url+="?fromDate="+lastUpdate.toISOString();
     let token = getToken();
     // console.log(url);
     return fetch(url, {
