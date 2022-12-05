@@ -567,6 +567,20 @@ li {
   padding-bottom: 20px;
 }
 
+.export-btn{
+  position:fixed;
+  top: 18px;
+  right: 260px;
+  margin-left:0.5rem;
+  padding:5px;
+  display: block;
+  border-radius: 10px;
+  border:none;
+  color:white;
+  background-color: rgb(150, 149, 149);
+  /* margin-left: 100px; */
+  margin-right: 10px; 
+}
 /* .profile-btn{
   background-image:"ChatApp-Client/public/profile-img.jpeg" ;
 } */
