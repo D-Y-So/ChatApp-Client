@@ -206,8 +206,24 @@ function changeStatus(){
     });
 }
 
-
-
+export function exportMessages(){
+    let token = getToken();
+     fetch(serverAddress + "/auth/exportMessages",{
+        method: 'GET',
+        headers: {
+            'Authorization': token
+        }
+    }).then(Response => Response.blob()).then(
+        blob => {
+            var url = window.URL.createObjectURL(blob);
+            var a = document.createElement('a');
+            a.href = url;
+            a.download = "messages.txt";
+            document.body.appendChild(a); // we need to append the element to the dom -> otherwise it will not work in firefox
+            a.click();    
+            a.remove();  //afterwards we remove the element again         
+        });
+}; 
 
 
 
