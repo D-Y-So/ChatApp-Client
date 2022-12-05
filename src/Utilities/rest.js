@@ -142,9 +142,60 @@ function getOtherProfileByUsername(username){
     }).then(Response => {
         if (Response.ok) {
             return Response.json();
+        } else {
+            return null;
         }
     }).then(result => result);
 
+}
+
+function getUserType(){
+    let token = getToken();
+    return fetch(serverAddress + "/auth/type" ,{
+        method: 'GET',
+        headers: {
+            'Authorization': token
+        }
+    }).then(Response => {
+        if (Response.ok) {
+            return Response.text();
+        } else {
+            return null;
+        }
+    });
+}
+
+function muteUnmute(username){
+    let token = getToken();
+    return fetch(serverAddress + "/auth/toggle-mute-unmute?usernameToToggle=" + username ,{
+        method: 'PUT',
+        headers: {
+            'Authorization': token
+        }
+    }).then(Response => {
+        if (Response.ok) {
+            console.log("toggeled user" + username + "successfully") ;
+        } else {
+            console.log("error in toggeling user mute unmute")
+        }
+    });
+
+}
+
+function changeStatus(){
+    let token = getToken();
+    return fetch(serverAddress + "/auth/change-status",{
+        method: 'PUT',
+        headers: {
+            'Authorization': token
+        }
+    }).then(Response => {
+        if (Response.ok) {
+            console.log(Response.text()) ;
+        } else {
+            console.log(Response.text())
+        }
+    });
 }
 
 
@@ -162,4 +213,5 @@ function getOtherProfileByUsername(username){
     //     });
     // }
 
-export{getUsernameFromToken, createUser, getPublicMessages,sendPublicMessage ,getAllUserPrivateMessages, getAllRegisteredUsers, getAllUserPrivateChats, sendPrivateMessage}
+export{getOtherProfileByUsername, getUsernameFromToken, createUser, getPublicMessages,sendPublicMessage ,
+    getAllUserPrivateMessages, getAllRegisteredUsers, getAllUserPrivateChats, sendPrivateMessage, getUserType, muteUnmute, changeStatus}

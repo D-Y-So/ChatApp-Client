@@ -32,7 +32,7 @@ function App() {
         <Route exact path="/profile" element={<Profile/>} />
         <Route exact path='/mainPage' element={<MainPage/>} />
         <Route exact path ='/privateChat' element={<PrivateChat/>} />
-        <Route exact path='/guest' element={GuestLogin()}/>
+        <Route exact path='/guest' element={<GuestLogin/>}/>
       </Routes>
     </Router>
     </div>

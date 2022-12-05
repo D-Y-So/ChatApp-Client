@@ -4,9 +4,10 @@
     min-height: 100vh;
     align-items: center;
     justify-content: center;
-    color: rgb(139, 27, 237);
-    background-image: linear-gradient(79deg, #7439db, #C66FBC 48%, #F7944D);
-    /* background-color: rgb(220, 220, 220); */
+    /* color: rgb(110, 121, 133); */
+    color:rgb(70, 78, 86);
+    /* background-image: linear-gradient(79deg, #7439db, #C66FBC 48%, #F7944D); */
+    background-color: rgb(189, 197, 208);
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   }
 
@@ -60,7 +61,7 @@
   .login-btn, .register-btn{
     margin: 1.5rem 0;
     border: none;
-    background-color:rgb(201, 169, 248);
+    background-color:rgb(182, 190, 200);
     padding: 10px;
     border-radius: 10px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -69,10 +70,15 @@
     font-weight: 500;
   }
 
+  .login-btn:hover, .register-btn:hover{
+    background-color:rgb(126, 143, 160);
+  }
+
+
   .link-btn{
     border: none;
     background:none ;
-    color: rgb(191, 149, 255);
+    color:rgb(70, 78, 86);
     text-decoration: underline;
     padding: 30px;
     border-radius: 10px;
@@ -290,7 +296,7 @@
 .update-profile-btn{
   margin: 1.5rem 0;
   border: none;
-  background-color:rgb(201, 169, 248);
+  background-color:rgb(79, 79, 79);
   padding: 10px;
   border-radius: 10px;
   font-size: large;
@@ -306,7 +312,7 @@ ul[title]::before {
   font-size: large;
   /* font-weight: bold; */
   color: white;
-  padding: 4px;
+  padding-right: 30px;
 }
 
 ul{
@@ -340,7 +346,7 @@ li {
 }
 
 .messages-container{
-  background-color:rgb(242, 242, 242) ;
+  background-color:rgb(255, 255, 255) ;
   width: 600px;
   height: 700px;
   margin-right:100px;
@@ -350,7 +356,7 @@ li {
 }
 
 .message-li{
-  background-color: rgb(190, 190, 190);
+  background-color: rgb(121, 120, 120);
   border-radius: 10px;
   padding: 5px; 
   margin:5px;
@@ -373,26 +379,30 @@ li {
   position:center;
   border: none;
   vertical-align: middle;
+  background-color: rgb(237, 237, 237);
 }
 
 .profile-btn{
+  position:fixed;
+  top: 18px;
+  right: 65px;
   padding:5px;
   display: block;
   border-radius: 10px;
   border:none;
   color:white;
-  background-color: rgb(132, 132, 132);
+  background-color: rgb(150, 149, 149);
   /* margin-left: 100px; */
   margin-right: 10px;
 }
 
-.profile-btn:hover{
-  background-color: #555;
+.profile-btn:hover, .change-status-btn:hover{
+  background-color: rgb(124, 123, 123);
 
 }
 
 .user-li{
-  background-color: rgb(201, 169, 248);
+  background-color: rgb(79, 79, 79);
   border:none;
   border-radius: 5px;
   color:white;
@@ -400,7 +410,7 @@ li {
 }
 
 .user-li:hover{
-  background-color:rgb(180, 131, 254) ;
+  background-color:rgb(89, 88, 88) ;
 }
 
 .title-private-chat{
@@ -408,6 +418,9 @@ li {
 }
 
 .logout-btn{
+  position:fixed;
+  top: 18px;
+  right: 15px;
   background-color:rgb(207, 52, 52);
   color:white;
   border: none;
@@ -430,6 +443,99 @@ li {
 }
 
 
+
+.profile-btn-private-chat{
+  position:fixed;
+  top: 18px;
+  right: 100px;
+  padding:5px;
+  display: block;
+  border-radius: 10px;
+  border:none;
+  color:white;
+  background-color: rgb(150, 149, 149);
+  /* margin-left: 100px; */
+  margin-right: 10px;
+}
+
+.profile-btn-private-chat:hover{
+  background-color: rgb(124, 123, 123);
+
+}
+
+.logout-btn-private{
+  background-color:rgb(207, 52, 52);
+  color:white;
+  border: none;
+  border-radius: 10px;
+  margin-left: 5px;
+  /* padding: 5px; */
+  position:fixed;
+  top: 18px;
+  right: 50px;
+}
+
+.other-user-profile{
+  color:#fff;
+  background-color: gray;
+  padding-right: 25px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  height: fit-content;
+  border-radius: 10px;
+  position:fixed;
+  top: 200px;
+  right: 50px;
+}
+
+.main-btn-private-chat{
+  color: white;
+  background-color:  rgb(150, 149, 149);
+  padding: 5px;
+  border: none;
+  border-radius: 10px;
+  margin-left: 5px;
+  border-radius: 10px;
+  position:fixed;
+  top: 18px;
+  right: 20px;
+}
+
+.main-btn-private-chat:hover{
+  background-color: rgb(124, 123, 123);
+
+}
+
+.other-profile-img{
+  border: 3px solid #555;
+  background-color: rgb(255, 249, 242, 0.4) ;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;  width: 100px; height: 100px; overflow: hidden; border-radius: 50%;
+}
+
+.mute-unmute{
+  background-color: rgb(162, 162, 162);
+  border:none;
+  border-radius: 5px;
+  color:white;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.change-status-btn{
+  position:fixed;
+  top: 18px;
+  right: 155px;
+  padding:5px;
+  display: block;
+  border-radius: 10px;
+  border:none;
+  color:white;
+  background-color: rgb(150, 149, 149);
+  /* margin-left: 100px; */
+  margin-right: 10px;
+}
 
 /* .profile-btn{
   background-image:"ChatApp-Client/public/profile-img.jpeg" ;
