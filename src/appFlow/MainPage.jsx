@@ -71,7 +71,7 @@ export const MainPage = () => {
                 <h2 className="main-chat-title">Main Chat Room</h2>
                 <div className="users"> {userType !== "GUEST"? 
                     <div>
-                        <ul title="All Registered Users :"> {users && users.map(
+                        <ul title="Registered Users :"> {users && users.map(
                             (user, index) => 
                             <li key={index}>
                                 {<button className="user-li" onClick={()=>setTab(user.username)}>{user.username}</button>}
