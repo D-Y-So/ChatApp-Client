@@ -7,7 +7,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Profile from './dataComponents/SelfProfile';
 import MainPage from './appFlow/MainPage';
 import PrivateChat from './dataComponents/PrivateChat'
-
+import { GuestLogin } from './appFlow/guest';
 
 
 function App() {
@@ -32,6 +32,7 @@ function App() {
         <Route exact path="/profile" element={<Profile/>} />
         <Route exact path='/mainPage' element={<MainPage/>} />
         <Route exact path ='/privateChat' element={<PrivateChat/>} />
+        <Route exact path='/guest' element={GuestLogin()}/>
       </Routes>
     </Router>
     </div>
