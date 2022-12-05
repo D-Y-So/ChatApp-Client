@@ -7,7 +7,7 @@
     /* color: rgb(110, 121, 133); */
     color:rgb(70, 78, 86);
     /* background-image: linear-gradient(79deg, #7439db, #C66FBC 48%, #F7944D); */
-    background-color: rgb(189, 197, 208);
+    background-color: rgb(219, 230, 245);
     font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   }
 
@@ -61,7 +61,7 @@
   .login-btn, .register-btn{
     margin: 1.5rem 0;
     border: none;
-    background-color:rgb(182, 190, 200);
+    background-color:rgb(167, 180, 196);
     padding: 10px;
     border-radius: 10px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -81,6 +81,7 @@
     color:rgb(70, 78, 86);
     text-decoration: underline;
     padding: 30px;
+    padding-bottom: 5px;
     border-radius: 10px;
     cursor:pointer;
   }
@@ -265,7 +266,7 @@
     left: 10px;
     /* padding-left: 40%;
     padding-right: 40%; */
-    color: white;
+    color:  rgb(111, 124, 139);
     /* padding: 10px; */
   }
 
@@ -311,7 +312,7 @@ ul[title]::before {
   display: block;
   font-size: large;
   /* font-weight: bold; */
-  color: white;
+  color: rgb(111, 124, 139);
   padding-right: 30px;
 }
 
@@ -438,7 +439,7 @@ li {
   position: fixed; 
   top: 18px;
   left: 10px;
-  color: white;
+  color: rgb(111, 124, 139);
   /* padding: 10px; */
 }
 
@@ -535,6 +536,23 @@ li {
   background-color: rgb(150, 149, 149);
   /* margin-left: 100px; */
   margin-right: 10px;
+}
+
+.line{
+  text-align: center; 
+  border-bottom: 1px solid #000; 
+  line-height: 0.1em;
+  margin: 30px 0 20px; 
+  /* background-color: rgb(218, 218, 218) ; */
+}
+
+.or-line{
+  background-color: rgb(219, 230, 245);
+  padding-top: 2px;
+  padding-bottom: 2px;
+  padding-left: 10px;
+  padding-right: 10px;
+  border-radius: 5px;
 }
 
 /* .profile-btn{
