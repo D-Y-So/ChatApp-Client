@@ -4,7 +4,7 @@ import { serverAddress } from "./constants";
 import { addMessage } from "../dataComponents/publicMessages";
 import { getPublicMessages } from './rest';
 import {addPrivateMessage} from '../dataComponents/PrivateChat'
-
+import {addNewUser} from '../dataComponents/users'
 let stompClient;
 function socketFactory() {
     console.log("socketFactory")
@@ -14,11 +14,12 @@ function socketFactory() {
 
 
 function onConnected(username) {
-    let x = '/user/' + username +"/";
-    console.log(x)
+    let privateUrl = '/user/' + username +"/";
+    console.log(privateUrl)
     console.log("connection established");
     stompClient.subscribe('/topic/mainChat', usePublicMessageReceived);
-    stompClient.subscribe(x,usePrivateMessageReceived)
+    stompClient.subscribe(privateUrl,usePrivateMessageReceived);
+    stompClient.subscribe("/newUsers",addUser)
     console.log("first")
 }
 
@@ -42,10 +43,13 @@ function usePrivateMessageReceived(payload) {
     console.log("private message recieved");
     var message = JSON.parse(payload.body);
     console.log(message);
-    addPrivateMessage(message);
-    
-
-    
+    addPrivateMessage(message);   
+}
+function addUser(payload) {
+    console.log("new user");
+    var user = JSON.parse(payload.body);
+    console.log(user);
+    addNewUser(user);
 }
 
 export { openConnection };
