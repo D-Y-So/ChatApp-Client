@@ -101,6 +101,7 @@ function sendPrivateMessage(messageBody, username) {
         }
     }).then(Response => {
         if (Response.ok) {
+            console.log(Response.body);
             return Response.text();
         }
     }).then(result => result);
@@ -120,6 +121,16 @@ function getUsernameFromToken(){
     }).then(result => result);
 }
 
+function guestLogin(){
+    let url=serverAddress+"/guestJoin";
+    return fetch(url,{
+        method: 'GET',
+    })
+    .then(response=>response.text())
+    .then(response=>{return response});
+}
+
+
 function getOtherProfileByUsername(username){
     let token = getToken();
     return fetch(serverAddress + "/auth/profile/load?usernameToView="+username ,{
@@ -134,6 +145,7 @@ function getOtherProfileByUsername(username){
     }).then(result => result);
 
 }
+
 
 
 
