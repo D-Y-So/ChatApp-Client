@@ -2,13 +2,10 @@ import React, { useState, useEffect } from "react"
 import { json, Link, useNavigate } from "react-router-dom";
 import { usePublicMesagges } from "../dataComponents/publicMessages.js";
 import { GetUsers } from "../dataComponents/users.js";
-import { getAllRegisteredUsers,changeStatus, sendPublicMessage, getAllUserPrivateChats, getUsernameFromToken, getUserType, muteUnmute } from "../Utilities/rest";
-import { serverAddress } from "../Utilities/constants";
-import Register from "./Register";
-import { Button } from "bootstrap";
-import { get } from "jquery";
-import {GetUsersNew} from "../dataComponents/newUsers.jsx";
-import { openConnection, isConnected } from "../Utilities/socketjs.js";
+import { changeStatus, sendPublicMessage, getUsernameFromToken, getUserType, muteUnmute, exportMessages } from "../Utilities/rest";
+
+
+import { openConnection } from "../Utilities/socketjs.js";
 import PrivateChat from "../dataComponents/PrivateChat.jsx";
 import Logout from "./Logout.jsx";
 
@@ -105,6 +102,9 @@ export const MainPage = () => {
                     </div> : <div></div>}
                     <div>
                         <Logout/>
+                    </div>
+                    <div>
+                        <button  onClick={() =>exportMessages()}>export</button>
                     </div>
                 </div>
                 </div> : 
