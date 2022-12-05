@@ -58,10 +58,6 @@ export const MainPage = () => {
         let x= await changeStatus(username);
     }
 
-
-
-
-
     function inputMessage(e) {
         setMessageToSend(e.target.value);
     }
@@ -73,19 +69,21 @@ export const MainPage = () => {
             
             {tab === "Main Chat" ? <div className="container">
                 <h2 className="main-chat-title">Main Chat Room</h2>
-                <div className="users">
-                    <ul title="All Registered Users :"> {users && users.map(
-                        (user, index) => 
-                        <li key={index}>
-                            {<button className="user-li" onClick={()=>setTab(user.username)}>{user.username}</button>}
-                            <div>
-                                {userType === "ADMIN" ? <button className="mute-unmute" onClick={() => onMuteUnmute(user.username)}>mute</button> :
-                                <div></div>}    
-                            </div>
-                            
-                        </li>
-                        )}
-                    </ul>
+                <div className="users"> {userType !== "GUEST"? 
+                    <div>
+                        <ul title="All Registered Users :"> {users && users.map(
+                            (user, index) => 
+                            <li key={index}>
+                                {<button className="user-li" onClick={()=>setTab(user.username)}>{user.username}</button>}
+                                <div>
+                                    {userType === "ADMIN" ? <button className="mute-unmute" onClick={() => onMuteUnmute(user.username)}>mute</button> :
+                                    <div></div>}    
+                                </div>
+                                
+                            </li>
+                            )}
+                        </ul>
+                    </div> : <div></div>}
                 </div>
                 <div className="messages-container">
                     <div className="messages">
@@ -96,14 +94,18 @@ export const MainPage = () => {
                     <input className="text-in" onChange={inputMessage}></input>
                     <button className="send-btn" onClick={() => sendPublicMessage(messageToSend)}>send</button>
                 </div>
-                <div>
-                <button className="change-status-btn" onClick={() => onChangeStatus()}>change status</button>
-                </div>
-                <div >
-                    <button className="profile-btn" onClick={() => navigate("/Profile")}> edit profile</button>
-                </div> 
-                <div>
-                    <Logout/>
+                <div> {userType !== "GUEST" ?
+                    <div>
+                        <div>
+                        <button className="change-status-btn" onClick={() => onChangeStatus()}>change status</button>
+                        </div>
+                        <div >
+                            <button className="profile-btn" onClick={() => navigate("/Profile")}> edit profile</button>
+                        </div> 
+                    </div> : <div></div>}
+                    <div>
+                        <Logout/>
+                    </div>
                 </div>
                 </div> : 
                 <PrivateChat user={tab}/> }

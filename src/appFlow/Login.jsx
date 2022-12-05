@@ -50,7 +50,10 @@ export const Login = (props) => {
                 <input className= "form-inputs" value={password} type="password" placeholder="Type your password" id="password" name="password" onChange={(e) => setPassword(e.target.value)}/>
                 <button type="submit" className="login-btn">Login</button>
             </form>
+            <p className="line"><span className="or-line">or</span></p>
             <Link to="/register" className="link-btn">Don't have an account? Register</Link>
+        
+            <Link to="/guest" className="link-btn">Login as a guest</Link>
         </div>
 
     )

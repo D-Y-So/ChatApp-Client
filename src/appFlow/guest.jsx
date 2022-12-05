@@ -1,18 +1,21 @@
 import { useState } from "react";
 import {guestLogin} from "../Utilities/rest";
 import { useNavigate } from "react-router-dom";
-export function GuestLogin() {
+export const GuestLogin = () => {
+
     const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const message="guestToken: ";
-    function handleSubmit(e)
-    {
+
+    const handleSubmit = async(e) => { 
+        e.preventDefault();
         try{
         guestLogin(username).then(async (res)=>{
             if(res.ok){
               let token= await res.text();
               token=token.substring(message.length);
               localStorage.setItem("token", token);
+              console.log(token);
               navigate("/mainPage");                        
             }
             else {
@@ -37,3 +40,5 @@ export function GuestLogin() {
     )
 
 }
+
+export default GuestLogin;

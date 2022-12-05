@@ -57,7 +57,7 @@ function sendPublicMessage(messageBody) {
         }
     }).then(Response => {
         if (Response.ok) {
-            return Response.text();
+            return Response.text();   
         }
     }).then(result => result);
 }
@@ -72,11 +72,19 @@ function getAllRegisteredUsers (lastUpdate) {
         headers:{
             'Authorization': token
         }
-    }).then(response=>response.json())
-    .then(response=>{
-        // console.log(response);
-        // console.log(lastUpdate);
-        return response;    });
+    }).then(response=>{
+        if(response.ok){
+            return response.json();
+        }else{
+            return null;
+        }
+    }
+    //     response.json())
+    // .then(response=>{
+    //     // console.log(response);
+    //     // console.log(lastUpdate);
+    //     return response;    });
+    );
 }
 
 const getAllUserPrivateChats = async (token) => {
