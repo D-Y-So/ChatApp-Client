@@ -67,6 +67,7 @@ export const MainPage = () => {
                         (user, index) => 
                         <li key={index}>
                             {<button className="user-li" onClick={()=>setTab(user.username)}>{user.username}</button>}
+                            {<button className="mute">mute</button>}
                         </li>
                         )}
                     </ul>

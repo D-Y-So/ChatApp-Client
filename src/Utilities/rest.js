@@ -130,6 +130,8 @@ function getOtherProfileByUsername(username){
     }).then(Response => {
         if (Response.ok) {
             return Response.json();
+        } else {
+            return null;
         }
     }).then(result => result);
 
@@ -149,4 +151,5 @@ function getOtherProfileByUsername(username){
     //     });
     // }
 
-export{getUsernameFromToken, createUser, getPublicMessages,sendPublicMessage ,getAllUserPrivateMessages, getAllRegisteredUsers, getAllUserPrivateChats, sendPrivateMessage}
+export{getOtherProfileByUsername, getUsernameFromToken, createUser, getPublicMessages,sendPublicMessage ,
+    getAllUserPrivateMessages, getAllRegisteredUsers, getAllUserPrivateChats, sendPrivateMessage}
