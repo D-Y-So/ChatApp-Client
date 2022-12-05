@@ -20,11 +20,11 @@ export default function SelfProfile() {
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState(""); //check if i should upload the image or not
-  const [isPublic, setIsPublic] = useState("");
+  const [isPublic, setIsPublic] = useState(false);
   const [userName, setUserName] = useState("");
   
   const fetchData = async () => {
-    //e.preventDefault();
+
     try {
       let token = localStorage.getItem("token");
       let response = await fetch(serverAddress + "/auth/profile/loadSelf", {
@@ -35,24 +35,20 @@ export default function SelfProfile() {
           }
       });
       let responseJson = await response.json();
-  
-      //console.log(responseJson.firstName)
-      //console.log(responseJson.records.value);
+
       console.log(responseJson)
       setFirstName(responseJson.firstName);
       setLastName(responseJson.lastName);
       setDateOfBirth(responseJson.dateOfBirth);
       setDescription(responseJson.description);
       setCurrentImage(responseJson.imageUrl);
-      setIsPublic(responseJson.public)
-
-      //console.log(response.lastName);
-
+      setIsPublic(responseJson.isPublic);
+      console.log("response");
+      console.log(responseJson);
+      console.log(isPublic)
 
       if(response.ok){
         console.log("ok");
-        
-        // need to switch form 
     } else {
         window.alert("could not update profile " + responseJson);
     }
@@ -67,30 +63,43 @@ export default function SelfProfile() {
     fetchData();
   }, [])
 
+  const handleChange =(event) => {
+    console.log("public")
+    console.log(event.target.value)
+    if(event.target.value ==="public"){
+      setIsPublic(true);
+    }else{
+      setIsPublic(false);
+    }
+  }
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
+    console.log("before try")
+    console.log(isPublic)
 
     try {
       
       let token = localStorage.getItem("token");
+      let profile = JSON.stringify({
+        firstName: firstName,
+        lastName: lastName,
+        dateOfBirth: dateOfBirth,
+        description: description, 
+        imageUrl: imageUrl,
+        public: isPublic
+      });
+      console.log(profile)
       let res = await fetch(serverAddress + "/auth/profile/edit", {
           method:'PUT',
-          body: JSON.stringify({
-              firstName: firstName,
-              lastName: lastName,
-              dateOfBirth: dateOfBirth,
-              description: description, 
-              imageUrl: imageUrl,
-              isPublic: isPublic
-          }),
+          body: profile,
           headers:{
               'Content-Type': 'application/json',
               'Authorization' : token
           }
       });
       let resJson = await res.json();
-      console.log(resJson);
-
+    
       // setFirstName("");
       // setLastName("");
       // setDateOfBirth("");
@@ -108,8 +117,8 @@ export default function SelfProfile() {
     } catch (e) {
       //setError("Failed to update profile");
     }
-
   };
+
 
   return (
         <form className="profile-form" onSubmit={handleFormSubmit}>
@@ -205,9 +214,9 @@ export default function SelfProfile() {
               <label htmlFor="isPublic"> profile is public or private </label>
                 {/* <fieldset> */}
                 {/* <legend>profile :</legend> */}
-                <div>
-                  <input id= "isPublic" type="radio" value="true" name="profile is public" onClick={(e) => setIsPublic(1)}/> public
-                  <input id= "isPublic" type="radio" value="false" name="profile is public" onClick={(e) => setIsPublic(0)}/> private
+                <div >
+                  <input id= "isPublic" type="radio" value="public" name="profile is public" onChange={handleChange}/> public
+                  <input id= "isPublic" type="radio" value="private" name="profile is public" onChange={handleChange}/> private
                 </div>
                 </div>
                 <button type="submit" className="update-profile-btn"> Update Profile </button>

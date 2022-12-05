@@ -81,7 +81,7 @@
     color:rgb(70, 78, 86);
     text-decoration: underline;
     padding: 30px;
-    padding-bottom: 5px;
+    padding-bottom: 0px;
     border-radius: 10px;
     cursor:pointer;
   }
@@ -553,6 +553,18 @@ li {
   padding-left: 10px;
   padding-right: 10px;
   border-radius: 5px;
+}
+
+.guest-login{
+  padding:3rem;
+  background-color: white;
+  display:flex;
+  flex-direction: column;
+  border-radius: 15px;
+}
+
+.guest-lgn-title{
+  padding-bottom: 20px;
 }
 
 /* .profile-btn{
