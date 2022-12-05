@@ -104,7 +104,7 @@ export const MainPage = () => {
                         <Logout/>
                     </div>
                     <div>
-                        <button  onClick={() =>exportMessages()}>export</button>
+                        <button className="export-btn" onClick={() =>exportMessages()}>export</button>
                     </div>
                 </div>
                 </div> : 
