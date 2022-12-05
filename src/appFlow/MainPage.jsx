@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react"
 import { json, Link, useNavigate } from "react-router-dom";
 import { usePublicMesagges } from "../dataComponents/publicMessages.js";
 import { GetUsers } from "../dataComponents/users.js";
-import { getAllRegisteredUsers, sendPublicMessage, getAllUserPrivateChats, getUsernameFromToken } from "../Utilities/rest";
+import { getAllRegisteredUsers,changeStatus, sendPublicMessage, getAllUserPrivateChats, getUsernameFromToken, getUserType, muteUnmute } from "../Utilities/rest";
 import { serverAddress } from "../Utilities/constants";
 import Register from "./Register";
 import { Button } from "bootstrap";
@@ -17,23 +17,23 @@ export const MainPage = () => {
     const navigate = useNavigate();
 
     const [publicMessages,] = usePublicMesagges();
-    //console.log(publicMessages instanceof Array);
     const [messageToSend, setMessageToSend] = useState("");
     const [privateChat, setPrivateChat] = useState();
-    // const [users, setActivatedUsers] = useState();
-    // const [registeredUsers] = GetUsersNew();
     const [users] = GetUsers();
     const [newUsers, setnewUsers] = useState([]);
     const [lastUpdate, setLastUpdate] = useState();
-    // console.log(registeredUsers);
-    // console.log(registeredUsers instanceof Array);
     const [tab, setTab] = useState("Main Chat");
+    const [userType, setUserType]= useState("");
     let username = null;
-    console.log(tab);
+    
 
     useEffect(() => {
         async function init() {
         username = await getUsernameFromToken();
+        let type = await getUserType();
+        setUserType(type);
+        console.log("userType");
+        console.log(userType);
         openConnection(username);
         } 
         init();
@@ -49,6 +49,17 @@ export const MainPage = () => {
         setTab(t);
         console.log(tab)
     }
+
+    async function onMuteUnmute(username){
+        let x= await muteUnmute(username);
+    }
+
+    async function onChangeStatus(username){
+        let x= await changeStatus(username);
+    }
+
+
+
 
 
     function inputMessage(e) {
@@ -67,7 +78,11 @@ export const MainPage = () => {
                         (user, index) => 
                         <li key={index}>
                             {<button className="user-li" onClick={()=>setTab(user.username)}>{user.username}</button>}
-                            {<button className="mute">mute</button>}
+                            <div>
+                                {userType === "ADMIN" ? <button className="mute-unmute" onClick={() => onMuteUnmute(user.username)}>mute</button> :
+                                <div></div>}    
+                            </div>
+                            
                         </li>
                         )}
                     </ul>
@@ -80,6 +95,9 @@ export const MainPage = () => {
                     </div>
                     <input className="text-in" onChange={inputMessage}></input>
                     <button className="send-btn" onClick={() => sendPublicMessage(messageToSend)}>send</button>
+                </div>
+                <div>
+                <button className="change-status-btn" onClick={() => onChangeStatus()}>change status</button>
                 </div>
                 <div >
                     <button className="profile-btn" onClick={() => navigate("/Profile")}> edit profile</button>
