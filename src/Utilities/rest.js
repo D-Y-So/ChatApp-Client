@@ -121,13 +121,14 @@ function getUsernameFromToken(){
     }).then(result => result);
 }
 
-function guestLogin(){
+export function guestLogin(userName){
     let url=serverAddress+"/guestJoin";
     return fetch(url,{
-        method: 'GET',
-    })
-    .then(response=>response.text())
-    .then(response=>{return response});
+        method: 'POST',
+        body:userName
+    });
+    
+
 }
 
 
