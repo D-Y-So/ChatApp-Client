@@ -20,6 +20,12 @@
       margin: 0.5rem;
     }
   }
+  input {
+    /* margin: 1px; */
+    padding: 1rem;
+    border-radius: 10px;
+  }
+
 
   /* @media screen and (min-width: 600px) {
     .profile-form {
