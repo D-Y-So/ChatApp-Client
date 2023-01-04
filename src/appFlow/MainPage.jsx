@@ -21,9 +21,21 @@ export const MainPage = () => {
     const [lastUpdate, setLastUpdate] = useState();
     const [tab, setTab] = useState("Main Chat");
     const [userType, setUserType]= useState("");
+    const [mutedUsers, setMutedUsers] = useState([]);
     let username = null;
     
 
+    const handleMuteUnmute = (username) => {
+        // Update the list of muted users
+        if (mutedUsers.includes(username)) {
+          setMutedUsers((prevMutedUsers) => prevMutedUsers.filter((u) => u !== username));
+        } else {
+          setMutedUsers((prevMutedUsers) => [...prevMutedUsers, username]);
+        }
+    
+        // Call the onMuteUnmute function to update the backend
+        onMuteUnmute(username);
+      };
     useEffect(() => {
         async function init() {
         username = await getUsernameFromToken();
@@ -31,6 +43,7 @@ export const MainPage = () => {
         setUserType(type);
         console.log("userType");
         console.log(userType);
+        
         } 
         init();
        
@@ -72,7 +85,7 @@ export const MainPage = () => {
                             <li key={index}>
                                 {<button className="user-li" onClick={()=>setTab(user.username)}>{user.userType==="ADMIN"?"*"+user.username:user.username}</button>}
                                 <div>
-                                    {userType === "ADMIN" && user.userType !== "ADMIN" ? <button className="mute-unmute" onClick={() => onMuteUnmute(user.username)}>{user.isMuted==="MUTED"?  "unmute":  "mute"} </button> :
+                                    {userType === "ADMIN" && user.userType !== "ADMIN" ? <button className="mute-unmute" onClick={() =>  handleMuteUnmute(user.username)}>{mutedUsers.includes(user.username) ? "unmute" : "mute"} </button> :
                                     <div></div>}    
                                 </div>
                                 
