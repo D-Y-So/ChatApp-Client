@@ -13,7 +13,7 @@ export default function PrivateChat ({user}) {
     const [messages, setMessages] = useState([]);
     const [messageToSend, setMessageToSend] = useState("");
     const [mainPage, setMainPage] = useState(false);
-    const [displayProfile, setDisplayProfile] = useState("");
+    const [displayProfile, setDisplayProfile] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
     const [buttonText, setButtonText] = useState("view profile")
 
