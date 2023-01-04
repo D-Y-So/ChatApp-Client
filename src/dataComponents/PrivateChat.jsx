@@ -20,6 +20,7 @@ export default function PrivateChat ({user}) {
     // let set = setTab
     useEffect(() => {
         async function init() {
+            console.log("init of private messages has been called");
             let res = await getAllUserPrivateMessages(user);
             setMessages(res);          
         }
@@ -52,6 +53,7 @@ export default function PrivateChat ({user}) {
     }
 
     function addPrivateMessage(message){
+        console.log("addPrivateMessage has been called with message: " + message.content + " from " + message.sender + " at " + message.time + "");
         setMessages((messages) =>[...messages, message])
     }
 

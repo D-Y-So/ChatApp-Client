@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { serverAddress } from "../Utilities/constants";
 import { Link, useNavigate } from "react-router-dom";
+import { openConnection } from "../Utilities/socketjs";
+import { getUsernameFromToken } from "../Utilities/rest";
 
 
 
@@ -30,6 +32,11 @@ export const Login = (props) => {
             if(res.ok){
                 console.log(resJson);
                 localStorage.setItem("token", resJson);
+                async function init() {
+                    const username = await getUsernameFromToken();                 
+                    openConnection(username);
+                    } 
+                init();
                 navigate("/mainPage");
                 // need to switch form 
             } else {
