@@ -31,7 +31,6 @@ export const MainPage = () => {
         setUserType(type);
         console.log("userType");
         console.log(userType);
-        openConnection(username);
         } 
         init();
        
@@ -39,7 +38,7 @@ export const MainPage = () => {
 
     useEffect(() => {
         console.log("useEffect");
-        console.log(publicMessages);
+        console.log("public messages on main page:"+publicMessages);
     }, [publicMessages]);
 
     function changeTab(t) {
@@ -71,7 +70,7 @@ export const MainPage = () => {
                         <ul title="Registered Users :"> {users && users.map(
                             (user, index) => 
                             <li key={index}>
-                                {<button className="user-li" onClick={()=>setTab(user.username)}>{user.username}</button>}
+                                {<button className="user-li" onClick={()=>setTab(user.username)}>{user.userType==="ADMIN"?"*"+user.username:user.username}</button>}
                                 <div>
                                     {userType === "ADMIN" ? <button className="mute-unmute" onClick={() => onMuteUnmute(user.username)}>mute</button> :
                                     <div></div>}    

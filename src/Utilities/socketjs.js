@@ -28,7 +28,7 @@ function openConnection(username) {
     console.log(username);
     const socket = socketFactory();
     console.log(socket);
-    stompClient = Stomp.over(socket);
+    stompClient = Stomp.over( new SockJS(serverAddress + '/ws'));
     stompClient.connect({}, () => onConnected(username));
 }
 function usePublicMessageReceived(payload) {
