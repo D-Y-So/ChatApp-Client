@@ -22,6 +22,7 @@ export default function PrivateChat ({user}) {
         async function init() {
             console.log("init of private messages has been called");
             let res = await getAllUserPrivateMessages(user);
+            console.log(res);
             setMessages(res);          
         }
         init();
