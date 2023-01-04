@@ -24,8 +24,8 @@ export default function OtherProfile({user}){
                         <li ><img className="other-profile-img" src={profile.imageUrl}></img></li>
                         <li>Username: {profile.username}</li>
                         <li>Email: {profile.email}</li>
-                        <li>First Name: {profile.firstname}</li>
-                        <li>Last Name: {profile.lastname}</li>
+                        <li>First Name: {profile.firstName}</li>
+                        <li>Last Name: {profile.lastName}</li>
                         <li>Description: {profile.description}</li>
                         <li>Date Of Birth: {profile.dateOfBirth}</li>
                     </ul>

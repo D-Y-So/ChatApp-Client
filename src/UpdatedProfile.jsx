@@ -125,7 +125,7 @@ export default function Profile() {
               >
                 <span aria-hidden="true">&times;</span>
           </button>
-          <div className="profile">
+          <div className="profile-update">
             {/* <legend> profile of + { }</legend> */}
             {/* <button class="closebtn" onclick={navigate('/mainPage')}>×</button> */}
  

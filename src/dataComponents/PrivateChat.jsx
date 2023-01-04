@@ -13,7 +13,7 @@ export default function PrivateChat ({user}) {
     const [messages, setMessages] = useState([]);
     const [messageToSend, setMessageToSend] = useState("");
     const [mainPage, setMainPage] = useState(false);
-    const [displayProfile, setDisplayProfile] = useState("");
+    const [displayProfile, setDisplayProfile] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
     const [buttonText, setButtonText] = useState("view profile")
 
@@ -69,7 +69,7 @@ export default function PrivateChat ({user}) {
         <div>
             <div className="private-messages">
 
-                <h2 className="title-private-chat">private chat with {user}</h2>
+                <h2 className="title-private-chat">Private Chat - {user}</h2>
                 <div className="messages-container">
                     <div className="messages">
                         <ul>{messages && messages.map(
