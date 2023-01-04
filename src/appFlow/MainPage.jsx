@@ -72,7 +72,7 @@ export const MainPage = () => {
                             <li key={index}>
                                 {<button className="user-li" onClick={()=>setTab(user.username)}>{user.userType==="ADMIN"?"*"+user.username:user.username}</button>}
                                 <div>
-                                    {userType === "ADMIN" ? <button className="mute-unmute" onClick={() => onMuteUnmute(user.username)}>mute</button> :
+                                    {userType === "ADMIN" && user.userType !== "ADMIN" ? <button className="mute-unmute" onClick={() => onMuteUnmute(user.username)}>{user.isMuted==="MUTED"?  "unmute":  "mute"} </button> :
                                     <div></div>}    
                                 </div>
                                 
