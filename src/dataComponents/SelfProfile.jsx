@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { serverAddress } from "../Utilities/constants";
+import { Form } from "react-bootstrap";
 
 // import { useAuth } from "../../contexts/AuthContext";
 // import { generateAvatar } from "../../utils/GenerateAvatar";
@@ -14,6 +15,7 @@ export default function SelfProfile() {
 
   //const [username, setUsername] = useState("");
   //const [email, setEmail] = useState("");
+  const pripub = ['Private', 'Public'];
   const [firstName, setFirstName] = useState("");
   const [currentImage, setCurrentImage] = useState("");
   const [lastName, setLastName] = useState("");
@@ -42,7 +44,8 @@ export default function SelfProfile() {
       setDateOfBirth(responseJson.dateOfBirth);
       setDescription(responseJson.description);
       setCurrentImage(responseJson.imageUrl);
-      setIsPublic(responseJson.isPublic);
+      setIsPublic(responseJson.public);
+      console.log(responseJson.public);
       console.log("response");
       console.log(responseJson);
       console.log(isPublic)
@@ -63,15 +66,15 @@ export default function SelfProfile() {
     fetchData();
   }, [])
 
-  const handleChange =(event) => {
-    console.log("public")
-    console.log(event.target.value)
-    if(event.target.value ==="public"){
-      setIsPublic(true);
-    }else{
-      setIsPublic(false);
-    }
-  }
+  // const handleChange =(event) => {
+  //   console.log("public")
+  //   console.log(event.target.value)
+  //   if(event.target.value ==="public"){
+  //     setIsPublic(true);
+  //   }else{
+  //     setIsPublic(false);
+  //   }
+  // }
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -146,7 +149,7 @@ export default function SelfProfile() {
               <img src={currentImage} ></img>
             </div>
               <div>
-                <label htmlFor="firstName"> first name</label>
+                <label htmlFor="firstName"> First Name&nbsp;</label>
                 <input
                 id="firstName"
                 name="firstName"
@@ -160,7 +163,7 @@ export default function SelfProfile() {
             
             
               <div>
-              <label htmlFor="lastName"> last name </label>
+              <label htmlFor="lastName"> Last Name	&nbsp;</label>
               <input
                 id="lastName"
                 name="lastName"
@@ -172,9 +175,9 @@ export default function SelfProfile() {
               />
               </div>
               <div>
-              <label htmlFor="dateOfBirth">birthday</label>
+              <label htmlFor="dateOfBirth">Birthday&nbsp;	&nbsp;	&nbsp;</label>
               <input
-                // style={{ width: '200px'}}
+                style={{ textAlign: 'left'}}
                 id="dateOfBirth"
                 name="dateOfBirth"
                 type="date"
@@ -185,7 +188,7 @@ export default function SelfProfile() {
               />
               </div>
               <div>
-              <label htmlFor="description"> description  </label>
+              <label htmlFor="description"> Description  </label>
               <input
                 id="description"
                 name="description"
@@ -198,7 +201,7 @@ export default function SelfProfile() {
               />
               </div>
               <div>
-              <label htmlFor="imageUrl"> image path  </label>
+              <label htmlFor="imageUrl"> Image path	&nbsp;  </label>
                 <input
                   id="imageUrl"
                   name="imageUrl"
@@ -213,13 +216,17 @@ export default function SelfProfile() {
               </div>
             
               <div className="private-public">
-              <label htmlFor="isPublic"> profile is public or private </label>
+              <label htmlFor="isPublic"> Public or Private </label>
                 {/* <fieldset> */}
                 {/* <legend>profile :</legend> */}
-                <div >
+                <Form.Select value={isPublic} aria-label="Default select example" onChange={(e) => setIsPublic(e.target.value)}> 
+                  <option value={false}>Private</option>
+                  <option value={true}>Public</option>
+                </Form.Select>
+                {/* <div >
                   <input id= "isPublic" type="radio" value="public" name="profile is public" onChange={handleChange}/> public
                   <input id= "isPublic" type="radio" value="private" name="profile is public" onChange={handleChange}/> private
-                </div>
+                </div> */}
                 </div>
                 <button type="submit" className="update-profile-btn"> Update Profile </button>
             </div>

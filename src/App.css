@@ -37,7 +37,7 @@
   .form-inputs{
     border:  1px solid grey;
     margin: 5px;
-    width: 200px;
+    width: 300px;
             /* height: 25px; */
             /* margin: 2px; */
             -moz-box-sizing: border-box;
@@ -145,9 +145,9 @@
       margin: 30px;
           height: 100px;
           width: 100px;
-          padding-left: 100px;
-          /* padding-right: 00px; */
-          background-color: #FF6666;
+          /* padding-left: 100px; */
+          /* padding-right: 100px; */
+          /* background-color: #FF6666; */
           overflow-wrap: break-word;
     }
   
@@ -438,6 +438,8 @@ li {
 
 .title-private-chat{
   color:white;
+  position: relative;
+  right: 60px;
 }
 
 .logout-btn{

@@ -68,7 +68,7 @@ export default function PrivateChat ({user}) {
         <div>
             <div className="private-messages">
 
-                <h2 className="title-private-chat">private chat with {user}</h2>
+                <h2 className="title-private-chat">Private Chat - {user}</h2>
                 <div className="messages-container">
                     <div className="messages">
                         <ul>{messages && messages.map(
