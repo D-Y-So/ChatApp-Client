@@ -21,15 +21,7 @@
     }
   }
 
-  /* @media screen and (min-width: 600px) {
-    .profile-form {
-      padding: 3rem;
-      border: 1px solid white;
-      background-color: rgb(255, 255, 254);
-      border-radius: 15px;
-      margin: 0.5rem;
-    }
-  } */
+
 
   .auth-form-container , .login-form, .register-form{
     display:flex;
@@ -39,13 +31,18 @@
   .form-inputs{
     border:  1px solid grey;
     margin: 5px;
-    
-
+    width: 200px;
+            /* height: 25px; */
+            /* margin: 2px; */
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            flex-direction: row;
   }
 
-  .profile-inputs{
+  /* .profile-inputs{
     vertical-align: middle;
-  }
+  } */
 
   label {
     text-align: left;
@@ -137,6 +134,17 @@
     display: flex;
     flex-direction: row;
   }
+ 
+    .profile {
+      margin: 30px;
+          height: 100px;
+          width: 100px;
+          padding-left: 100px;
+          /* padding-right: 00px; */
+          background-color: #FF6666;
+          overflow-wrap: break-word;
+    }
+  
   
   .member-list{
     width: 20%;
@@ -231,14 +239,15 @@
   }
 
   .circular--portrait {
-    position: absolute; 
-    top: 75px;
-    left: 700px;
-    border: 4px solid #555;
-    background-color: rgb(255, 249, 242, 0.4) ;
+    /* position: absolute;  */
+    /* top: 75px;
+    left: 700px; */
+    border: 4px solid rgb(232, 232, 232);
+    background-color: rgba(255, 255, 255, 0.587) ;
     display: block;
     margin-left: auto;
     margin-right: auto;  width: 170px; height: 170px; overflow: hidden; border-radius: 50%;
+    margin-bottom: 20px;
   } 
 
   .circular--portrait img { 
@@ -287,17 +296,24 @@
 .profile-inputs{
   flex-direction: column;
   position: absolute; 
-  top: 270px;
-  left: 610px;
+  /* border: 5px solid;
+  display: flex;
+  justify-content: center; */
+  background-color: #555;
+  top: 120px;
+  left: 620px;
   color: white;
   font-size: large;
+  vertical-align: middle;
+  padding: 40px;
+  border-radius: 15px;
   /* text-align: center; */
   /* margin: 15px; */
 }
 .update-profile-btn{
   margin: 1.5rem 0;
   border: none;
-  background-color:rgb(79, 79, 79);
+  background-color:rgb(139, 138, 138);
   padding: 10px;
   border-radius: 10px;
   font-size: large;
@@ -581,6 +597,37 @@ li {
   /* margin-left: 100px; */
   margin-right: 10px; 
 }
+
+/* .date{
+  width:400px;
+
+} */
+.calendar.popup {
+  width:170px!important;
+}
+.calendar-new-month {
+  padding-right: 8%;
+  font-size: 12px;
+  width: 56%;
+}
+.calendar-new-year {
+  font-size: 12px;
+}
+.calendar.popup table tbody td {
+  padding: 4px 4px!important;
+}
+
+.calendar-new-header .button {
+  height: 27px;
+  background-size: 7px;
+}
+.dateOfBirth{
+  width: 500px;
+}
+
+/* .profile-update{
+  background-color: black;
+} */
 /* .profile-btn{
   background-image:"ChatApp-Client/public/profile-img.jpeg" ;
 } */

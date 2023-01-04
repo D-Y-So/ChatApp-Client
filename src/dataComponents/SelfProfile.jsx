@@ -138,12 +138,13 @@ export default function SelfProfile() {
             {/* <legend> profile of + { }</legend> */}
             {/* <button class="closebtn" onclick={navigate('/mainPage')}>×</button> */}
  
-            <div className="circular--portrait">
-              <img src={currentImage} ></img>
-            </div>
+           
             
            
             <div className="profile-inputs">
+            <div className="circular--portrait">
+              <img src={currentImage} ></img>
+            </div>
               <div>
                 <label htmlFor="firstName"> first name</label>
                 <input
@@ -171,8 +172,9 @@ export default function SelfProfile() {
               />
               </div>
               <div>
-              <label htmlFor="dateOfBirth"> date of birth  </label>
+              <label htmlFor="dateOfBirth">birthday</label>
               <input
+                // style={{ width: '200px'}}
                 id="dateOfBirth"
                 name="dateOfBirth"
                 type="date"
